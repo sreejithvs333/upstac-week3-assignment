@@ -1,4 +1,4 @@
-#About the Project
+# About the Project
 This is an assignment project for my master course.
 
 This repo consist of both frontend & backend code for the UPSTAC application.
@@ -6,7 +6,7 @@ This repo consist of both frontend & backend code for the UPSTAC application.
 1. Frontend - upstac-ui (React)
 2. Backend - UPSTAC-Week3-assignment (Java Spring boot)
 
-##Frontend
+## Frontend
 
 ### To run frontend code
 
@@ -16,7 +16,7 @@ In the project directory, you can run:
 
 ### `yarn start`
 
-##Backend
+## Backend
 
 ### To run backend code
 

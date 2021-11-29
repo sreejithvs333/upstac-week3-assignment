@@ -110,7 +110,7 @@ public class UserService {
 
     public User addTester(RegisterRequest user) {
 
-        return addUserWithRole(user, roleService.getForTester(), AccountStatus.INITIATED);
+        return addUserWithRole(user, roleService.getForTester(), AccountStatus.APPROVED);
     }
 
 

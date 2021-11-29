@@ -15,6 +15,7 @@ import org.upgrad.upstac.testrequests.TestRequest;
 import org.upgrad.upstac.testrequests.TestRequestQueryService;
 import org.upgrad.upstac.testrequests.TestRequestUpdateService;
 import org.upgrad.upstac.testrequests.flow.TestRequestFlowService;
+import org.upgrad.upstac.users.User;
 
 import javax.validation.ConstraintViolationException;
 import java.util.List;
@@ -30,8 +31,6 @@ public class ConsultationController {
     Logger log = LoggerFactory.getLogger(ConsultationController.class);
 
 
-
-
     @Autowired
     private TestRequestUpdateService testRequestUpdateService;
 
@@ -40,16 +39,15 @@ public class ConsultationController {
 
 
     @Autowired
-    TestRequestFlowService  testRequestFlowService;
+    TestRequestFlowService testRequestFlowService;
 
     @Autowired
     private UserLoggedInService userLoggedInService;
 
 
-
     @GetMapping("/in-queue")
     @PreAuthorize("hasAnyRole('DOCTOR')")
-    public List<TestRequest> getForConsultations()  {
+    public List<TestRequest> getForConsultations() {
         //Implement this method to get the list of test requests having status as 'LAB_TEST_COMPLETED'
         // make use of the findBy() method from testRequestQueryService class
         //return the result
@@ -59,7 +57,7 @@ public class ConsultationController {
 
     @GetMapping
     @PreAuthorize("hasAnyRole('DOCTOR')")
-    public List<TestRequest> getForDoctor()  {
+    public List<TestRequest> getForDoctor() {
 
         //Implement this method
 
@@ -69,13 +67,10 @@ public class ConsultationController {
         // For reference check the method getForTests() method from LabRequestController class
 
         // replace this line of code with your implementation
-        throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED,"Not implemented");
-
-
+        throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED, "Not implemented");
 
 
     }
-
 
 
     @PreAuthorize("hasAnyRole('DOCTOR')")
@@ -90,22 +85,18 @@ public class ConsultationController {
         // return the above created object
         // For reference check the method assignForLabTest() method from LabRequestController class
         try {
-            // replace this line of code with your implementation
-            throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED,"Not implemented");
+            User doctor = userLoggedInService.getLoggedInUser();
+            return testRequestUpdateService.assignForConsultation(id, doctor);
 
-        }catch (AppException e) {
+        } catch (AppException e) {
             throw asBadRequest(e.getMessage());
         }
     }
 
 
-
     @PreAuthorize("hasAnyRole('DOCTOR')")
     @PutMapping("/update/{id}")
-    public TestRequest updateConsultation(@PathVariable Long id,@RequestBody CreateConsultationRequest testResult) {
-
-        // Implement this method
-
+    public TestRequest updateConsultation(@PathVariable Long id, @RequestBody CreateConsultationRequest testResult) {
         // Implement this method to update the result of the current test request id with test doctor comments
         // Create an object of the User class to get the logged in user
         // Create an object of TestRequest class and make use of updateConsultation() method from testRequestUpdateService class
@@ -113,17 +104,14 @@ public class ConsultationController {
         // For reference check the method updateLabTest() method from LabRequestController class
 
         try {
-            // replace this line of code with your implementation
-            throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED,"Not implemented");
-
-
+            User doctor = userLoggedInService.getLoggedInUser();
+            return testRequestUpdateService.updateConsultation(id, testResult, doctor);
         } catch (ConstraintViolationException e) {
             throw asConstraintViolation(e);
-        }catch (AppException e) {
+        } catch (AppException e) {
             throw asBadRequest(e.getMessage());
         }
     }
-
 
 
 }

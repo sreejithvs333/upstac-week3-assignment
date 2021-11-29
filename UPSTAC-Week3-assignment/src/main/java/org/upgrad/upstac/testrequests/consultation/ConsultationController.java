@@ -59,26 +59,18 @@ public class ConsultationController {
     @PreAuthorize("hasAnyRole('DOCTOR')")
     public List<TestRequest> getForDoctor() {
 
-        //Implement this method
-
         // Create an object of User class and store the current logged in user first
         //Implement this method to return the list of test requests assigned to current doctor(make use of the above created User object)
         //Make use of the findByDoctor() method from testRequestQueryService class to get the list
         // For reference check the method getForTests() method from LabRequestController class
-
-        // replace this line of code with your implementation
-        throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED, "Not implemented");
-
-
+        User doctor = userLoggedInService.getLoggedInUser();
+        return testRequestQueryService.findByDoctor(doctor);
     }
 
 
     @PreAuthorize("hasAnyRole('DOCTOR')")
     @PutMapping("/assign/{id}")
     public TestRequest assignForConsultation(@PathVariable Long id) {
-
-        // Implement this method
-
         // Implement this method to assign a particular test request to the current doctor(logged in user)
         //Create an object of User class and get the current logged in user
         //Create an object of TestRequest class and use the assignForConsultation() method of testRequestUpdateService to assign the particular id to the current user
@@ -87,7 +79,6 @@ public class ConsultationController {
         try {
             User doctor = userLoggedInService.getLoggedInUser();
             return testRequestUpdateService.assignForConsultation(id, doctor);
-
         } catch (AppException e) {
             throw asBadRequest(e.getMessage());
         }

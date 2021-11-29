@@ -20,7 +20,7 @@ In the project directory, you can run:
 
 ### To run backend code
 
-You can simply run the main function in UpstacApplication class.
+The backend code runs simply by running the ‘UpstacApplication.java’ file
 
 ### Database
 

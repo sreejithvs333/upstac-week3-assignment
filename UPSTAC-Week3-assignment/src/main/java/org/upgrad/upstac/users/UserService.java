@@ -100,7 +100,7 @@ public class UserService {
     }
 
     public User addDoctor(RegisterRequest user) {
-
+        //TODO: revert back the account status to INITIATED. A doctor should be verified before approving
         return addUserWithRole(user, roleService.getForDoctor(), AccountStatus.APPROVED);
     }
     public User addGovernmentAuthority(RegisterRequest user) {
@@ -109,7 +109,7 @@ public class UserService {
     }
 
     public User addTester(RegisterRequest user) {
-
+        //TODO: revert back the account status to INITIATED. A tester should be verified before approving
         return addUserWithRole(user, roleService.getForTester(), AccountStatus.APPROVED);
     }
 
